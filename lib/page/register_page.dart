@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
 import 'package:thydelivery_mobileapp/page/my_button.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key, required this.signUp});
+class SignUpPage extends StatelessWidget {
+  SignUpPage({super.key, required this.singIn});
 
-  final void Function() signUp;
+  final void Function() singIn;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   Widget build(context) {
     return Scaffold(
@@ -37,14 +39,20 @@ class LoginPage extends StatelessWidget {
               hintText: 'Passwrod',
               obscureText: true,
             ),
+            SizedBox(height: 10),
+            MyTextField(
+              textEditingController: confirmPasswordController,
+              hintText: 'Confirm Password',
+              obscureText: true,
+            ),
             SizedBox(height: 25),
-            MyButton(onTap: () {}, text: 'sign in '),
+            MyButton(onTap: () {}, text: 'Sign Up'),
             SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Not a Member?',
+                  'Have an Account?',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.inversePrimary,
                     fontWeight: FontWeight.bold,
@@ -53,9 +61,9 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(width: 15),
                 GestureDetector(
-                  onTap: signUp,
+                  onTap: singIn,
                   child: Text(
-                    'Sign Up',1
+                    'Sign In',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

@@ -7,7 +7,7 @@ class ThemeProvider with ChangeNotifier {
   ThemeData _themeData = lightMode;
 
   //getters
-  bool get _isDarkMode => _themeData == darkMode;
+  bool get isDarkMode => _themeData == darkMode;
   ThemeData get themeData => _themeData;
 
   set themeData(ThemeData themeData) {
@@ -20,5 +20,6 @@ class ThemeProvider with ChangeNotifier {
     } else {
       _themeData = darkMode;
     }
+    notifyListeners(); //notify the Ui to change whenever there is a change in a state
   }
 }

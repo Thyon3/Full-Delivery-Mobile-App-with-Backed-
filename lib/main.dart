@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:thydelivery_mobileapp/page/login_page.dart';
+import 'package:provider/provider.dart';
+import 'package:thydelivery_mobileapp/auth/login_or_register.dart';
+import 'package:thydelivery_mobileapp/page/register_page.dart';
+import 'package:thydelivery_mobileapp/theme/theme_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  Widget build(contxt) {
-    return MaterialApp(home: LoginPage());
+  Widget build(context) {
+    return MaterialApp(
+      home: LoginOrRegister(),
+      theme: Provider.of<ThemeProvider>(context).themeData,
+    );
   }
 }
