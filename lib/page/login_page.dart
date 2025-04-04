@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
 import 'package:thydelivery_mobileapp/page/my_button.dart';
+import 'package:thydelivery_mobileapp/page/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key, required this.signUp});
@@ -8,6 +9,12 @@ class LoginPage extends StatelessWidget {
   final void Function() signUp;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void signIn(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => HomePage()));
+  }
 
   Widget build(context) {
     return Scaffold(
@@ -38,7 +45,12 @@ class LoginPage extends StatelessWidget {
               obscureText: true,
             ),
             SizedBox(height: 25),
-            MyButton(onTap: () {}, text: 'sign in '),
+            MyButton(
+              onTap: () {
+                signIn(context);
+              },
+              text: 'sign in ',
+            ),
             SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +67,7 @@ class LoginPage extends StatelessWidget {
                 GestureDetector(
                   onTap: signUp,
                   child: Text(
-                    'Sign Up',1
+                    'Sign Up',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

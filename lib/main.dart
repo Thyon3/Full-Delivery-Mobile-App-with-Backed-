@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/auth/login_or_register.dart';
-import 'package:thydelivery_mobileapp/page/register_page.dart';
 import 'package:thydelivery_mobileapp/theme/theme_provider.dart';
 
 void main() {
