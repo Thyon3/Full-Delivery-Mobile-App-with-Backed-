@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/components/my_cart_imte_tile.dart';
+import 'package:thydelivery_mobileapp/page/my_button.dart';
+import 'package:thydelivery_mobileapp/page/paymentpage.dart';
 
 class Cart extends StatelessWidget {
   Cart({super.key});
@@ -67,19 +69,43 @@ class Cart extends StatelessWidget {
             foregroundColor: Theme.of(context).colorScheme.inversePrimary,
             backgroundColor: Colors.transparent,
           ),
-          body: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: userCart.length,
-                  itemBuilder: (context, index) {
-                    final singleCartItem = userCart[index];
-                    return MyCartImteTile(cartItem: singleCartItem);
-                  },
-                ),
-              ),
-            ],
-          ),
+          body:
+              userCart.isEmpty
+                  ? Center(
+                    child: Text(
+                      'Your cart is Empty please add some elemnts and come back',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                  : Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: userCart.length,
+                            itemBuilder: (context, index) {
+                              final singleCartItem = userCart[index];
+                              return MyCartImteTile(cartItem: singleCartItem);
+                            },
+                          ),
+                        ),
+                        MyButton(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaymentPage(),
+                              ),
+                            );
+                          },
+                          text: 'Pay Now',
+                        ),
+                      ],
+                    ),
+                  ),
         );
       },
     );

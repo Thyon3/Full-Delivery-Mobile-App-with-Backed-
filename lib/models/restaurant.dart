@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:thydelivery_mobileapp/components/my_cart_imte_tile.dart';
 import 'package:thydelivery_mobileapp/models/cart_item.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:collection/collection.dart';
+import 'package:intl/intl.dart';
 
 class Restaurant with ChangeNotifier {
   final List<Food> menu = [
@@ -305,6 +307,53 @@ class Restaurant with ChangeNotifier {
   void clearCart() {
     _cart.clear();
     notifyListeners();
+  }
+
+  //fomratting double price into dollar values and addons to strings
+
+  String formatPrice(double price) {
+    return '\$${price.toStringAsFixed(2)}'; //returns $price
+  }
+
+  //formatting the addons
+
+  String formatAddons(List<AddOns> addons) {
+    return addons
+        .map((element) => '${element.name}(${formatPrice(element.price)})')
+        .join(', ');
+  }
+
+  //generate a reciet
+
+  String userCartReciet() {
+    final reciet = StringBuffer();
+    reciet.writeln('Here is Your reciet');
+    reciet.writeln();
+
+    String formattedDate = DateFormat(
+      'yyyy-MM-dd HH:mm:ss',
+    ).format(DateTime.now());
+
+    reciet.writeln(formattedDate);
+    reciet.writeln();
+    reciet.writeln('------------------------------------------');
+
+    // print out all the necessary information about the order including the quantity, food type and the addons
+    for (final item in _cart) {
+      reciet.writeln(
+        '${item.quantity} x ${item.food.name} - ${formatPrice(item.food.price)}',
+      );
+      if (item.availableAddOns.isNotEmpty) {
+        reciet.writeln('Add Ons: ${formatAddons(item.availableAddOns)}');
+      }
+    }
+
+    reciet.writeln('------------------------------------------');
+    reciet.writeln();
+
+    reciet.writeln('Total Items: ${getNumberOfItemsInTheCart()} ');
+    reciet.writeln('Total Price: ${getTotalPrice()}');
+    return reciet.toString();
   }
 
   //helper methods
