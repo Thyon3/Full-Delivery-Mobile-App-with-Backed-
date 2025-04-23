@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/myreciet.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:thydelivery_mobileapp/models/restaurant.dart';
+import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 
 class Deliveryprogress extends StatefulWidget {
   @override
@@ -7,6 +12,19 @@ class Deliveryprogress extends StatefulWidget {
 }
 
 class _DeliveryprogressState extends State<Deliveryprogress> {
+  // get access to the database you have created in the services folder
+  FirestoreService db = FirestoreService();
+
+  void initState() {
+    // if we get to this page it means that the user has paid so save the orders to the database
+    String orders = context.read<Restaurant>().userCartReciet();
+    String currentAddress = context.read<Restaurant>().getDeliveryAddress;
+    db.saveOrdersToFireStore(orders, currentAddress);
+    super.initState();
+
+    // if we get to this page add the user that order to the database also
+  }
+
   Widget _customNavigationBar(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(25),

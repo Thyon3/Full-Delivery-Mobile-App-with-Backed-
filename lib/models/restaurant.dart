@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/my_cart_imte_tile.dart';
 import 'package:thydelivery_mobileapp/models/cart_item.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
+import 'package:thydelivery_mobileapp/models/app_user.dart';
 
 class Restaurant with ChangeNotifier {
   final List<Food> menu = [
@@ -229,17 +231,26 @@ class Restaurant with ChangeNotifier {
   //
 
   // getters
+  List<CartItem> get getCart {
+    return _cart;
+  }
+
+  String get getDeliveryAddress {
+    return _deliveryAddress;
+  }
+
+  List<AppUser> get getUsers {
+    return _users;
+  }
 
   //operators
 
   //creat a cart for the items
   final List<CartItem> _cart = [];
 
-  // a getter for the cart
+  // the delivery address
 
-  List<CartItem> get getCart {
-    return _cart;
-  }
+  String _deliveryAddress = 'Arat Killo Adwa St';
 
   //add to cart
   void addToCart(Food food, List<AddOns> availabaleAddOns) {
@@ -357,4 +368,20 @@ class Restaurant with ChangeNotifier {
   }
 
   //helper methods
+
+  // updating the delivery address
+
+  void updateDeliveryAddress(String newAddress) {
+    _deliveryAddress = newAddress;
+    notifyListeners();
+  }
+
+  //  create a list of users
+  List<AppUser> _users = [];
+
+  // have a function to add a new user
+
+  void addUser(String name, String email, String phoneNumber) {
+    _users.add(AppUser(name: name, email: email, phoneNumber: phoneNumber));
+  }
 }

@@ -21,15 +21,9 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
@@ -54,6 +48,23 @@ class DefaultFirebaseOptions {
     authDomain: 'thyondelivery.firebaseapp.com',
     storageBucket: 'thyondelivery.firebasestorage.app',
     measurementId: 'G-G581X8CHTZ',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCby5IGrv9rbb1RiKkEwKZS34UvYq1tC7s',
+    appId: '1:767827909880:android:5f5005befb12f163a02f0d',
+    messagingSenderId: '767827909880',
+    projectId: 'thyondelivery',
+    storageBucket: 'thyondelivery.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyABzBkYadmrsele2OBC6wdDDka0CFhiRX8',
+    appId: '1:767827909880:ios:9bce265e55982b2da02f0d',
+    messagingSenderId: '767827909880',
+    projectId: 'thyondelivery',
+    storageBucket: 'thyondelivery.firebasestorage.app',
+    iosBundleId: 'com.example.thydeliveryMobileapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

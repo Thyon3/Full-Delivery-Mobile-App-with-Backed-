@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:thydelivery_mobileapp/page/my_button.dart';
 import 'package:thydelivery_mobileapp/page/deliveryprogress.dart';
+import 'package:thydelivery_mobileapp/page/personal_information.dart';
 
 class PaymentPage extends StatefulWidget {
   @override
@@ -57,7 +58,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Deliveryprogress(),
+                        builder: (context) => PersonalInformation(),
                       ),
                     );
                   },
@@ -106,7 +107,10 @@ class _PaymentPageState extends State<PaymentPage> {
             formKey: formKey,
           ),
           Spacer(),
-          MyButton(onTap: payNow, text: 'Pay Now'),
+          Container(
+            padding: EdgeInsets.only(bottom: 10),
+            child: MyButton(onTap: payNow, text: 'Pay Now'),
+          ),
         ],
       ),
     );

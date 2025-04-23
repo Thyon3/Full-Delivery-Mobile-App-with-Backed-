@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "767827909880",
+    "project_id": "thyondelivery",
+    "storage_bucket": "thyondelivery.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767827909880:android:5f5005befb12f163a02f0d",
+        "android_client_info": {
+          "package_name": "com.example.thydelivery_mobileapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCby5IGrv9rbb1RiKkEwKZS34UvYq1tC7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

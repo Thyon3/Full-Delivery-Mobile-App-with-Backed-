@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:thydelivery_mobileapp/models/restaurant.dart';
 
 class MyCurrentLocation extends StatelessWidget {
+  TextEditingController controller = TextEditingController();
   void openLocationSearchBox(BuildContext context) {
     showDialog(
       context: context,
@@ -10,6 +13,7 @@ class MyCurrentLocation extends StatelessWidget {
             title: Text('Your address'),
             content: TextField(
               decoration: InputDecoration(hintText: 'Search address...'),
+              controller: controller,
             ),
             actions: [
               MaterialButton(
@@ -17,7 +21,12 @@ class MyCurrentLocation extends StatelessWidget {
                 child: Text('Cancel'),
               ),
               MaterialButton(
-                onPressed: Navigator.of(context).pop,
+                onPressed: () {
+                  context.read<Restaurant>().updateDeliveryAddress(
+                    controller.text,
+                  );
+                  Navigator.pop(context);
+                },
                 child: Text('Save'),
               ),
             ],
@@ -48,12 +57,15 @@ class MyCurrentLocation extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  Text(
-                    'Arat Killo Adwa St',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Consumer<Restaurant>(
+                    builder:
+                        (context, restaurant, child) => Text(
+                          restaurant.getDeliveryAddress,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                   ),
                   Icon(Icons.keyboard_arrow_down_outlined),
                 ],
