@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
 import 'package:thydelivery_mobileapp/page/my_button.dart';
 import 'package:thydelivery_mobileapp/page/home_page.dart';
+import 'package:thydelivery_mobileapp/services/auth/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key, required this.signUp});
@@ -10,10 +11,21 @@ class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void signIn(BuildContext context) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => HomePage()));
+  void signIn(BuildContext context) async {
+    AuthService authService = AuthService();
+    //  call the sign in methodd
+
+    try {
+      await authService.signInWithEmailPassword(
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(title: Text(e.toString())),
+      );
+    }
   }
 
   Widget build(context) {

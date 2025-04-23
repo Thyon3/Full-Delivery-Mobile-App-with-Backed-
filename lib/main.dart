@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:thydelivery_mobileapp/auth/login_or_register.dart';
 import 'package:thydelivery_mobileapp/firebase_options.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
+import 'package:thydelivery_mobileapp/services/auth/auth_gate.dart';
 import 'package:thydelivery_mobileapp/theme/theme_provider.dart';
 
 void main() async {
@@ -26,7 +26,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   Widget build(context) {
     return MaterialApp(
-      home: LoginOrRegister(),
+      home: AuthGate(),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }

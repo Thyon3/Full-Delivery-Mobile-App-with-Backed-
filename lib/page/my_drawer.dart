@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/drawer_tile.dart';
 import 'package:thydelivery_mobileapp/page/settings_page.dart';
+import 'package:thydelivery_mobileapp/services/auth/auth_service.dart';
 
 class MyDrawer extends StatelessWidget {
   void goToSettings(BuildContext context) {
@@ -8,6 +9,11 @@ class MyDrawer extends StatelessWidget {
       context,
       MaterialPageRoute(builder: (context) => SettingsPage()),
     );
+  }
+
+  void logOut() {
+    AuthService authService = AuthService();
+    authService.signOut();
   }
 
   Widget build(context) {
@@ -39,7 +45,13 @@ class MyDrawer extends StatelessWidget {
           ),
 
           Spacer(),
-          DrawerTile(title: 'L O G O U T ', icon: Icons.logout, onTap: () {}),
+          DrawerTile(
+            title: 'L O G O U T ',
+            icon: Icons.logout,
+            onTap: () {
+              logOut();
+            },
+          ),
           SizedBox(height: 25),
         ],
       ),
